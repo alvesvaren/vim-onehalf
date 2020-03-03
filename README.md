@@ -1,124 +1,71 @@
-# One Half ½ 🎨 🖥
+# Vim Installation & Usage
 
-[![version tag](https://img.shields.io/github/tag/sonph/onehalf.svg?style=flat-square)](https://github.com/sonph/onehalf/releases)
-[![license tag](https://img.shields.io/github/license/sonph/onehalf.svg?style=flat-square)](https://github.com/sonph/onehalf/blob/master/LICENSE.txt)
-[![package control](https://img.shields.io/packagecontrol/dt/One%20Half%20Color%20Schemes.svg?style=flat-square)](https://packagecontrol.io/packages/One%20Half%20Color%20Schemes)
+![screenshot: vim](../screenshots/vim.png)
+NeoVim + Tmux with true colors on iTerm2.
 
-A color scheme for Sublime Text, (Neo)Vim, iTerm, and more. Based on Atom's One.
+## Installation
+### Using a plugin manager (recommended)
 
-- Name: One Half
-- Author: Son A. Pham [@sonph](http://github.com/sonph)
-- Repo: https://github.com/sonph/onehalf
-- License: MIT
+Use [Pathogen](http://github.com/tpope/vim-pathogen),
+[Vundle](http://github.com/gmarik/vundle),
+[Neobundle](http://github.com/Shougo/neobundle.vim) or your favourite Vim
+package manager.
 
-![dark](./screenshots/dark.png)
-![light](./screenshots/light.png)
-![desktop_dark](./screenshots/desktop_dark.png)
-![desktop_light](./screenshots/desktop_light.png)
+To install with Vundle, put
 
-**Table of Contents**
+    Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Installation & Usage](#installation--usage)
-- [Contributing / Troubleshooting / Bug Reports](#contributing--troubleshooting--bug-reports)
-- [License](LICENSE.txt)
+in your `.vimrc`, restart vim then execute `:PluginInstall`. This will install
+both the color schemes and vim-airline themes.
 
+### Manual Installation
+Download the files in [vim/](./) and put them in their respective folders
+(`./vim/colors/` and `./vim/autoload/airline/themes/`)
 
-## Features
-- Light and dark color schemes.
-- Support a wide range of editors and terminals for a consistent color theme.
-  - [x] [TextMate](./sublimetext)
-  - [x] [Sublime Text 2/3](./sublimetext)
-  - [x] [GVim, MacVim, NeoVim, vim-airline (GUI/true colors)](./vim)
-  - [x] [OS X Terminal.app](./terminal)
-  - [x] [iTerm2](./iterm)
-  - [x] [Terminal Vim, vim-airline (256 colors)](./vim)
-  - [x] [Gnome Terminal](./gnome-terminal)
-  - [x] [Konsole](./konsole)
-  - [x] [Alacritty](./alacritty)
-  - [x] [Xcode](./xcode)
-  - [x] [Mintty/WSLtty](./mintty)
-  - [x] [FluentTerminal](./fluentterminal)
-  - [x] [Windows Terminal](./windowsterminal)
-  - [x] [bat](https://github.com/sharkdp/bat)
-  - [x] [pywal](https://github.com/dylanaraps/pywal)
-  - [x] [PuTTY](./putty)
-  - [x] [Kitty](./kitty)
-  - [ ] Hyper
-  - [ ] ConEmu
-  - [ ] IntelliJ
-  - [ ] Eclipse
-  - [ ] GNU Emacs
-  - [ ] Pygments
-  - [ ] Prism
-  - [Add Your Suggestion](https://github.com/sonph/onehalf/issues/new)
+## Usage
+Put `colorscheme <scheme>` and `let g:airline_theme='<theme>'`, if using airline
+or `let g:lightline.colorscheme='<theme>'`, if using lightline, in your `.vimrc`
+to set the color scheme and airline (or lightline) theme. Make sure you have
+syntax highlighting on, and 256 colors set. Vim version >= 7.4 recommended.
 
+For example:
 
-```
-                        light     dark
-0   normal  black       #383a42   #282c34
-1   normal  red         #e45649   #e06c75
-2   normal  green       #50a14f   #98c379
-3   normal  yellow      #c18401   #e5c07b
-4   normal  blue        #0184bc   #61afef
-5   normal  magenta     #a626a4   #c678dd
-6   normal  cyan        #0997b3   #56b6c2
-7   normal  white       #fafafa   #dcdfe4
-            foreground  #383a42   #dcdfe4
-            background  #fafafa   #282c34
-```
-
-
-## Screenshots
-All screenshots are available in the [screenshots folder](./screenshots).
-
-## Installation & Usage
-### Vim
-Install with Vundle then set `colorscheme` and `g:airline_theme`:
-
-    Bundle 'sonph/onehalf', {'rtp': 'vim/'}
+    syntax on
+    set t_Co=256
+    set cursorline
     colorscheme onehalflight
     let g:airline_theme='onehalfdark'
-
-Or if you are using lightline, set `g:lightline.colorscheme`:
-
-    let g:lightline.colorscheme='onehalfdark'
-
-If you want your vim and terminal colors to match exactly, you must enable true colors in vim.
-
-For more details and manual installation, see [vim README](./vim/README.md).
+	" lightline
+	" let g:lightline.colorscheme='onehalfdark'
 
 
-### Sublime Text 2/3
-Install with [Package Control](https://packagecontrol.io/packages/One%20Half%20Color%20Schemes).
+### True Colors
+By default vim only allows specifying one of the 256 (8 bit) predefined colors
+([wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)).
 
-For more details and manual installation, see [sublime text README](./sublimetext/README.md).
+If you want to match colors in vim and in your terminal exactly, you must enable _true colors_ (24
+bit).
 
-
-### iTerm2
-1. Download the theme files in the [iterm](./iterm) folder.
-2. Import the color schemes:
-  - _Either_ double click on the files to import.
-  - _Or_ open iTerm Preferences > Profiles > Colors > Color Presets > Import
-  then select the downloaded files.
-3. Select Preferences > Profiles > Colors > Color Presets > One Half Light (Dark).
-
-
-### OS X Terminal.app
-Download the files in the [terminal](./terminal) folder and simply open the files. Terminal.app will
-automatically recognize and import the color schemes.
-
-### Pywal
-Copy the files in the [wal/colorschemes](./wal/colorschemes) folder under the matching
-directories in `~/.config/wal/colorschemes`, then enable the schemes (`-l` is for light theme):
+In vim/neovim, use `set termguicolors` option:
 
 ```
-> wal -l --theme one-half-light
-# or
-> wal --theme one-half-dark
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 ```
 
-## Contributing / Troubleshooting / Bug Reports
-Contributions are welcome. Feel free to [open an issue](https://github.com/sonph/onehalf/issues/new)
-if you have problems installing and using the color schemes.
+If you use tmux, you must use version 2.2 or newer. Put this in your config:
+
+```
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",*256col*:Tc"
+```
+
+([source](https://github.com/tmux/tmux/issues/1246))
+
+To test if your neovim/tmux/terminal combination supports true colors or not, use this
+[test script](https://github.com/sonph/dotfiles/blob/master/bin/truecolor.sh):
+
+![truecolors](./truecolors.png)
